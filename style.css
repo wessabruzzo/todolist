@@ -1,0 +1,14 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns:auto;
+    grid-template-areas: 
+    "a a a";
+}
+#item1 {
+    grid-area: "a";
+    margin-top:100px;
+}
