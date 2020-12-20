@@ -8,14 +8,22 @@ form.addEventListener('submit', addItem);
 itemList.addEventListener('click', deleteItem);
 
 // Add item
-function addItem(e){
+function addItem(e){ 
     e.preventDefault();
 
     // Get input value
     let newItem = document.getElementById('item').value;
 
-console.log(newItem);// the value in the text box
-
+    // Local Storage
+    // Convert variable newItem a string
+    let newItemSerialized = JSON.stringify(newItem);
+    console.log(newItemSerialized);
+    // Put variable into local storage
+    localStorage.setItem("newItem", newItemSerialized);
+    console.log(localStorage);
+    // Convert string to a variable
+    let newItemDeserialized = JSON.parse(localStorage.getItem("newItem"));
+    console.log(newItemDeserialized);
 
     // Create new li Element
     let li = document.createElement('li');
@@ -24,7 +32,7 @@ console.log(newItem);// the value in the text box
     li.className = 'list-group-item';
 
     // Add text node with input value
-    li.appendChild(document.createTextNode(newItem));
+    li.appendChild(document.createTextNode(newItemDeserialized));
 
     // Setting destination for text node with input value 
     itemList.appendChild(li);
@@ -49,12 +57,13 @@ console.log(newItem);// the value in the text box
         // Delete item function
         function deleteItem(e){
             if(e.target.classList.contains('delete-btn')){
-                if(confirm('Are You Sure?')){
                     var li = e.target.parentElement;
                     itemList.removeChild(li);
+                    // Delete from storage
+                    localStorage.removeItem("newItem");
                 }
             }
-        }
+        
     // Select input value of the text box 
 
     //I'm targeting the value of newItem idk how to reset it. It's asking me to create a function for .reset but, I still dont know how. Maybe creating a function that states once the input is larger than 0 and that input is entered to reset the input to 0
