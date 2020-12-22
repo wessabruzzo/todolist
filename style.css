@@ -17,3 +17,6 @@ body {
     grid-area: "b";
 
 }
+.items {
+    list-style-type: none;
+}

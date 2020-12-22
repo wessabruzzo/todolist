@@ -1,86 +1,54 @@
-let form = document.getElementById('addForm');
-let itemList = document.getElementById('items');
+// Storage- declaring the class where the const storageInput is directed.
+const storageInput = document.querySelector('.storage');
 
-// Form submit event
-form.addEventListener('submit', addItem);
+// Text- declaring the class where the const text is directed.
+const text = document.querySelector('.items');
 
-// Delete event
-itemList.addEventListener('click', deleteItem);
+// Submit button- declaring the class where the const button is directed.
+const button = document.querySelector('.button');
 
-// Add item
-function addItem(e){ 
-    e.preventDefault();
+// Input the entered value through the text box to storage
+storageInput.addEventListener('input', function letter(e) {
 
-    // Get input value
-    let newItem = document.getElementById('item').value;
+    // Conditional to create new li for each new To Do item. If 
 
-    // Local Storage
-    // Convert variable newItem a string
-    let newItemSerialized = JSON.stringify(newItem);
-    console.log(newItemSerialized);
-    // Put variable into local storage
-    localStorage.setItem("newItem", newItemSerialized);
-    console.log(localStorage);
-    // Convert string to a variable
-    let newItemDeserialized = JSON.parse(localStorage.getItem("newItem"));
-    console.log(newItemDeserialized);
 
-    // Create new li Element
-    let li = document.createElement('li');
+    // Create new li
+    let newLi = document.createElement('li');
+    // Add class
+    newLi.className = '.items';
+    //add attr
+    newLi.setAttribute('title', 'Hello Li');
+    console.log(newLi);
+    // Create text node (a list item)
+    let newLiText = document.createTextNode(text.textContent = e.target.value);
+    console.log(newLiText);
 
-    // Add class 
-    li.className = 'list-group-item';
+    // Turn to string localStorage only accepts strings
+    window.localStorage.setItem('A to do item', JSON.stringify(newLiText.textContent));
 
-    // Add text node with input value
-    li.appendChild(document.createTextNode(newItemDeserialized));
+    // Create an array for the To Do items to be listed in
+    // = newLiText.textContent 
 
-    // Setting destination for text node with input value 
-    itemList.appendChild(li);
+    // Input to text box
+   // text.textContent = e.target.value
 
-    // Create delete button
-    let deletebtn = document.createElement('button');
+   //Add to storage
+    //window.localStorage.setItem('To Do Item', '')
+console.log(e.target.value)
 
-    // Add class to delete button
-    deletebtn.className = 'delete-btn';
+})
+   /* 
+   
+   var newDiv = document.createElement('div');
+    newDiv.className = 'hello';
+    newDiv.setAttribute('title', 'hello div');
+    var newDivText = document.createTextNode('Hello Wess');
+    newDiv.appendChild(newDivText);
+    var container = document.querySelector('header .container');
+    var h1 = document.querySelector('header .h1');
 
-    // Add text node with input value 
-    deletebtn.appendChild(document.createTextNode('X'));
+    console.log(newDiv);
+    container.insertBefore(newDiv, h1);
 
-    // Set destination for text node with input value 
-    li.appendChild(deletebtn)
-    
-    // Action that deletes the list item
-    deletebtn.addEventListener('submit', deleteItem);
-
-    }
-
-        // Delete item function
-        function deleteItem(e){
-            if(e.target.classList.contains('delete-btn')){
-                    var li = e.target.parentElement;
-                    itemList.removeChild(li);
-                    // Delete from storage
-                    localStorage.removeItem("newItem");
-                }
-            }
-        
-    // Select input value of the text box 
-
-    //I'm targeting the value of newItem idk how to reset it. It's asking me to create a function for .reset but, I still dont know how. Maybe creating a function that states once the input is larger than 0 and that input is entered to reset the input to 0
-  
-/*
-newItem.reset();       
- resetNewItem.reset('item').value;
-    function resetNewItem() {
-
-        for (let i = item.length - 1; i > 0; i-= 1) {
-
-            console.log(`${i}. ${item[i]}`);
-
-    }
-*/
-
-    //document.getElementById('item')
-    //resetNewItem = document.getElementById('item').reset();
-    //resetNewItem = document.getElementById('item').reset();
-
+    */
