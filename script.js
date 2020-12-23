@@ -6,11 +6,22 @@ const text = document.querySelector('.items');
  
 // Submit button- declaring the class where the const button is directed.
 const button = document.querySelector('.button');
- 
 
-storageInput.addEventListener('input', function saveInput(e) {
-// how do we get new data and save it to localstorage
-    
+function view(){
+
+    // Prevents the page from reloading which is the default action of forms
+    e.preventDefault();
+
+    if(localStorage.getItem('data') == null){
+        document.getElementsByClassName('.items').textContent = JSON.parse(localStorage.getItem('data'));
+
+}
+
+}
+ 
+// Change event is fired for elements when an alteration to the element's value is commited. Unlike input that is fired for every entry
+storageInput.addEventListener('change', function saveInput(e) {
+
     // Prevents the page from reloading which is the default action of forms
     e.preventDefault();
 
@@ -23,19 +34,20 @@ storageInput.addEventListener('input', function saveInput(e) {
     newLi.setAttribute('title', 'Hello Li');
     // Create text node (a list item) just the value
     newLiText = document.createTextNode(text.textContent = e.target.value);
-    
-    // If there is nothing saved at the start then save an wmpty arraay
+    console.log(newLiText);
+
+    // If there is nothing saved at the start then save an empty array
     if(localStorage.getItem('data') == null){
     localStorage.setItem('data', '[]');
     }
 
-// Get old data and 
-let oldText = JSON.parse(localStorage.getItem('data'));
-console.log(oldText);
-// Slap it on the new data
-oldText.push(text.textContent); // JSON.stringify(e.target.value)
-// Save the old and new data to local storage
-localStorage.setItem('data', JSON.stringify(oldText));
+    // Get old data and 
+    let oldText = JSON.parse(localStorage.getItem('data'));
+    console.log(oldText);
+    // Slap it on the new data
+    oldText.push(text.textContent); // JSON.stringify(e.target.value)
+    // Save the old and new data to local storage
+    localStorage.setItem('data', JSON.stringify(oldText));
 })
 
 
